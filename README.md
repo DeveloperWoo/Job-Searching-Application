@@ -1,7 +1,7 @@
 # Job-Searching-Application
 multi-tier web-based application
 
-IDE: Eclipse
-Java version: 8
+#IDE: Eclipse
+#Java version: 8
 
 
