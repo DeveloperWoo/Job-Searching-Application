@@ -1,9 +1,0 @@
-1. index.html(main page) 
-   : get input(job title, city) from the user
-2. jobSearch.java(Servlet)
-   : get the data from index.html
-   : get a list of matched jobs
-   : send the list to the next page(displayJobs.jsp)
-3. displayJobs.jsp
-   : display the job list
-   : user can click a specific job here and it will take the user the detail page
