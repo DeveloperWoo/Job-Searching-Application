@@ -13,11 +13,18 @@ With this project we the potential employees are trying to make an application t
 #Functional Requirements/ Use Case
 
 1)The system will have a new user function where customers and job submitters are required to create an account before using any of the systems functions.
+
 2)After the user has created an account, they are able to choose either two option either post a job or apply for a job within a list.
+
 3)If the user chooses the post a job then he/she must specify the job requirements such as age requirements, work experience and a brief description on the benefits of having that specific job.
+
 4)The job post is then saved to file until another user wishes to apply for a specific job.
-5) If the user chooses to apply for a job, the user is required to enter information about his/her self and about the job they want to acquire. Then the user searches for potential jobs matching their specific criteria and a list of jobs is displayed.
+
+5) If the user chooses to apply for a job, the user is required to enter information about his/her self and about the job they want to 
+acquire. Then the user searches for potential jobs matching their specific criteria and a list of jobs is displayed.
+
 6) The user then clicks on the job they want from a list and click apply. A confirmation is displayed to assure the user that they have applied for the job.
+
 7)There system will have a logout function that sends users back to the beginning of the system.
 
 
