@@ -28,3 +28,6 @@ acquire. Then the user searches for potential jobs matching their specific crite
 7)There system will have a logout function that sends users back to the beginning of the system.
 
 
+
+
+
