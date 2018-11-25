@@ -1,6 +1,5 @@
 use jobsearch;
 
-
 create table jobs(
 jobID int not null auto_increment,
 employerID int not null,
