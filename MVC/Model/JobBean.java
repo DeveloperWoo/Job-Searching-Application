@@ -5,16 +5,19 @@ import java.util.Date;
 
 public class JobBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private int jobId;
+	private int employerId;
 	private String title;
-	private String type;
-	private String subType;
-	private String city;
+	private String type; //full or part time
+	private String subType; // permanent or contract
+	private String city; // Mississauga, Brampton, Oakville, Toronto **Enum class?
 	private String address;
-	private int numOfPosition;
+	private int	numOfPosition;
 	private String description;
 	private String qualification;
-	private String howToApply;
+	private String howToApply; 
 	private Date postingDate;
 	private Date closingDate;
 	private String note;
@@ -29,6 +32,15 @@ public class JobBean implements Serializable{
 
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
+	}
+	
+	
+	public int getEmployerId() {
+		return employerId;
+	}
+
+	public void setEmployerId(int employerId) {
+		this.employerId = employerId;
 	}
 
 	public String getTitle() {
@@ -129,10 +141,12 @@ public class JobBean implements Serializable{
 
 	@Override
 	public String toString() {
-		return "JobBean [jobId=" + jobId + ", title=" + title + ", type=" + type + ", subType=" + subType + ", city="
-				+ city + ", address=" + address + ", numOfPosition=" + numOfPosition + ", description=" + description
-				+ ", qualification=" + qualification + ", howToApply=" + howToApply + ", postingDate=" + postingDate
-				+ ", closingDate=" + closingDate + ", note=" + note + "]";
+		return "JobBean [jobId=" + jobId + ", employerId=" + employerId + ", title=" + title + ", type=" + type
+				+ ", subType=" + subType + ", city=" + city + ", address=" + address + ", numOfPosition="
+				+ numOfPosition + ", description=" + description + ", qualification=" + qualification + ", howToApply="
+				+ howToApply + ", postingDate=" + postingDate + ", closingDate=" + closingDate + ", note=" + note + "]";
 	}
+
+	
 
 }
