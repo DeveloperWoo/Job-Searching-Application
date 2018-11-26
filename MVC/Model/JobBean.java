@@ -11,7 +11,7 @@ public class JobBean implements Serializable{
 	private String subType;
 	private String city;
 	private String address;
-	private int	numOfPosition;
+	private int numOfPosition;
 	private String description;
 	private String qualification;
 	private String howToApply;
