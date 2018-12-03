@@ -17,10 +17,25 @@ public class EmployerBean implements Serializable{
 
 	//constructor with no argument
 	public EmployerBean() {	}
+	
+	//constructor with fields
+	public EmployerBean(String username, String password, String eName, String address, String contact, String aboutUs,
+			String website) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.eName = eName;
+		this.address = address;
+		this.contact = contact;
+		this.aboutUs = aboutUs;
+		this.website = website;
+	}
 
+	//getters & setters
 	public int getEmployerId() {
 		return employerId;
 	}
+
 
 	public void setEmployerId(int employerId) {
 		this.employerId = employerId;
