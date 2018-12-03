@@ -17,7 +17,7 @@ import Model.EmployerBean;
 public class EmployerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private EmployerDAO dao;
+	private EmployerDAO dao = new EmployerDAO();
 	
        
     public EmployerController() {
@@ -51,23 +51,30 @@ public class EmployerController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("emCreateAccount.jsp");
 			view.forward(request, response);
 		}else {//action.equals("createAccount")
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
 			String eName = request.getParameter("eName");
 			String address = request.getParameter("address");
 			String contact = request.getParameter("contact");
 			String aboutUs = request.getParameter("aboutUs");
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
+			String website = request.getParameter("website");
 			
-			try {
-				EmployerBean em = dao.addEmployer(EmployerBean employer);
-				request.setAttribute("employer", em);
-				
-				RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
-				view.forward(request, response);
-			}catch(NullPointerException e) {
-				e.getMessage();
-				System.out.println("NullPointerException");
-			}
+			EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
+			dao.addEmployer(em);				
+			
+			RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
+			view.forward(request, response);
+			
+//			try {
+//				EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
+//				dao.addEmployer(em);				
+//				
+//				RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
+//				view.forward(request, response);
+//			}catch(NullPointerException e) {
+//				e.getMessage();
+//				System.out.println("NullPointerException");
+//			}
 		}
 		
 		
