@@ -10,14 +10,11 @@ public class JobBean implements Serializable{
 	private int jobId;
 	private int employerId;
 	private String title;
-	private String type; //full or part time
-	private String subType; // permanent or contract
 	private String city; // Mississauga, Brampton, Oakville, Toronto **Enum class?
 	private String address;
 	private int	numOfPosition;
 	private String description;
 	private String qualification;
-	private String howToApply; 
 	private Date postingDate;
 	private Date closingDate;
 	private String note;
@@ -32,8 +29,7 @@ public class JobBean implements Serializable{
 
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
-	}
-	
+	}	
 	
 	public int getEmployerId() {
 		return employerId;
@@ -49,22 +45,6 @@ public class JobBean implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getSubType() {
-		return subType;
-	}
-
-	public void setSubType(String subType) {
-		this.subType = subType;
 	}
 
 	public String getCity() {
@@ -107,14 +87,6 @@ public class JobBean implements Serializable{
 		this.qualification = qualification;
 	}
 
-	public String getHowToApply() {
-		return howToApply;
-	}
-
-	public void setHowToApply(String howToApply) {
-		this.howToApply = howToApply;
-	}
-
 	public Date getPostingDate() {
 		return postingDate;
 	}
@@ -141,12 +113,10 @@ public class JobBean implements Serializable{
 
 	@Override
 	public String toString() {
-		return "JobBean [jobId=" + jobId + ", employerId=" + employerId + ", title=" + title + ", type=" + type
-				+ ", subType=" + subType + ", city=" + city + ", address=" + address + ", numOfPosition="
-				+ numOfPosition + ", description=" + description + ", qualification=" + qualification + ", howToApply="
-				+ howToApply + ", postingDate=" + postingDate + ", closingDate=" + closingDate + ", note=" + note + "]";
+		return "JobBean [jobId=" + jobId + ", employerId=" + employerId + ", title=" + title + ", city=" + city
+				+ ", address=" + address + ", numOfPosition=" + numOfPosition + ", description=" + description
+				+ ", qualification=" + qualification + ", postingDate=" + postingDate + ", closingDate=" + closingDate
+				+ ", note=" + note + "]";
 	}
-
-	
 
 }
