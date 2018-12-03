@@ -11,6 +11,14 @@ import Model.JobBean;
 import Util.DBUtil;
 
 public class JobDAO {
+	
+	
+
+	public JobDAO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public void addJob(JobBean job) {
 		Connection conn = null;
@@ -18,23 +26,21 @@ public class JobDAO {
 			conn = DBUtil.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(
 					"INSERT INTO jobs"
-					+ "(jobID, employerID, title, type, subType, city, address, numOfPosition, "
-					+ "description, qualification, howToApply, postingDate, closingDate, note)"
-					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");  //14
-			pstmt.setInt(1, job.getJobId());
-			pstmt.setInt(2, job.getEmployerId());
-			pstmt.setString(3, job.getTitle());
-			pstmt.setString(4, job.getType());
-			pstmt.setString(5, job.getSubType());
-			pstmt.setString(6, job.getCity());
-			pstmt.setString(7, job.getAddress());
-			pstmt.setInt(8, job.getNumOfPosition());
-			pstmt.setString(9, job.getDescription());
-			pstmt.setString(10, job.getQualification());
-			pstmt.setString(11, job.getHowToApply());
-			pstmt.setDate(12, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
-			pstmt.setDate(13, new java.sql.Date(job.getClosingDate().getTime())); //
-			pstmt.setString(14, job.getNote());	
+					+ "(employerID, title, city, address, numOfPosition, "
+					+ "description, qualification, postingDate, closingDate, note)"
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");  //10, jobID will be automatically set with next value
+			pstmt.setInt(1, job.getEmployerId());
+			pstmt.setString(2, job.getTitle());
+			pstmt.setString(3, job.getCity());
+			pstmt.setString(4, job.getAddress());
+			pstmt.setInt(5, job.getNumOfPosition());
+			pstmt.setString(6, job.getDescription());
+			pstmt.setString(7, job.getQualification());
+			pstmt.setDate(8, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
+			pstmt.setDate(9, new java.sql.Date(job.getClosingDate().getTime())); //
+			pstmt.setString(10, job.getNote());	
+			
+			pstmt.executeUpdate();
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -44,7 +50,8 @@ public class JobDAO {
 		}
 	}
 	
-	public void deleteUser(int jobID) {
+	
+	public void deleteJob(int jobID) {
 		Connection conn = null;
 		
 		try {
@@ -65,6 +72,7 @@ public class JobDAO {
 		}
 	}
 	
+	
 	public void updateUser(JobBean job) {
 		Connection conn = null;
 		
@@ -73,22 +81,19 @@ public class JobDAO {
 			
 			PreparedStatement pstmt = conn.prepareStatement(
 					"UPDATE jobs SET"
-					+ "title = ?, type =?, subType = ?, city = ?, address = ?, numOfPosition = ?, "
-					+ "description = ?, qualification = ?, howToApply = ?, postingDate = ?, "
+					+ "title = ?, city = ?, address = ?, numOfPosition = ?, "
+					+ "description = ?, qualification = ?, postingDate = ?, "
 					+ "closingDate = ?, note = ?");
 
 			pstmt.setString(1, job.getTitle());
-			pstmt.setString(2, job.getType());
-			pstmt.setString(3, job.getSubType());
-			pstmt.setString(4, job.getCity());
-			pstmt.setString(5, job.getAddress());
-			pstmt.setInt(6, job.getNumOfPosition());
-			pstmt.setString(7, job.getDescription());
-			pstmt.setString(8, job.getQualification());
-			pstmt.setString(9, job.getHowToApply());
-			pstmt.setDate(10, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
-			pstmt.setDate(11, new java.sql.Date(job.getClosingDate().getTime())); //
-			pstmt.setString(12, job.getNote());
+			pstmt.setString(2, job.getCity());
+			pstmt.setString(3, job.getAddress());
+			pstmt.setInt(4, job.getNumOfPosition());
+			pstmt.setString(5, job.getDescription());
+			pstmt.setString(6, job.getQualification());
+			pstmt.setDate(7, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
+			pstmt.setDate(8, new java.sql.Date(job.getClosingDate().getTime())); //
+			pstmt.setString(9, job.getNote());
 			
 			pstmt.executeUpdate();
 		}
@@ -106,17 +111,23 @@ public class JobDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
+			System.out.println(conn.toString());
 			Statement stmt = conn.createStatement();
 			ResultSet rSet = stmt.executeQuery("SELECT * FROM jobs");
 			
-			while(rSet.next()) {//if rSet has sth in it
+			while(rSet.next()) { // Move the cursor to the next row, return false if no more row
 				JobBean job = new JobBean();				
-				job.setJobId(rSet.getInt("jobId"));
+				job.setJobId(rSet.getInt("jobID"));
+				job.setEmployerId(rSet.getInt("employerID"));
 				job.setTitle(rSet.getString("title"));
-				job.setType(rSet.getString("type"));
 				job.setCity(rSet.getString("city"));
+				job.setAddress(rSet.getString("address"));
+				job.setNumOfPosition(rSet.getInt("numOfPosition"));
+				job.setDescription(rSet.getString("description"));
+				job.setQualification(rSet.getString("qualification"));
 				job.setPostingDate(rSet.getDate("postingDate"));
 				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setNote(rSet.getString("note"));
 				
 				jobs.add(job);
 			}
@@ -130,26 +141,71 @@ public class JobDAO {
 		return jobs;
 	}
 	
-	public List<JobBean> searchJobs(String title, String city) {
+	public JobBean getJobById(int jobId){
 		Connection conn = null;
-		List<JobBean> jobs = new ArrayList<JobBean>();
+		JobBean job = new JobBean();	
 		
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "SELECT * FROM jobs WHERE title = ? AND city = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, title);
-			pStmt.setString(2, city);
-			ResultSet rSet = pStmt.executeQuery();		
+			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM jobs WHERE jobID = ?");
+			pStmt.setInt(1, jobId);
+			ResultSet rSet = pStmt.executeQuery();	
+			System.out.println("inside dao.getJobById.try");
 			
-			while(rSet.next()) {//if rSet has sth in it
-				JobBean job = new JobBean();				
-				job.setJobId(rSet.getInt("jobId"));
+			while(rSet.next()) {//if rSet has something in it
+				System.out.println("inside dao.getJobById.while");
+						
+				job.setJobId(rSet.getInt("jobID"));
+				job.setEmployerId(rSet.getInt("employerID"));
 				job.setTitle(rSet.getString("title"));
-				job.setType(rSet.getString("type"));
 				job.setCity(rSet.getString("city"));
+				job.setAddress(rSet.getString("address"));
+				job.setNumOfPosition(rSet.getInt("numOfPosition"));
+				job.setDescription(rSet.getString("description"));
+				job.setQualification(rSet.getString("qualification"));
 				job.setPostingDate(rSet.getDate("postingDate"));
 				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setNote(rSet.getString("note"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.closeConnection(conn);
+		}
+		return job;
+	}
+	
+	
+	public List<JobBean> searchJobs(String title, String city) {
+		Connection conn = null;
+		List<JobBean> jobs = new ArrayList<JobBean>();
+		System.out.println("inside dao.searchJobs");
+		
+		try {
+			conn = DBUtil.getConnection();
+			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM jobs WHERE title = ? AND city = ?");
+			pStmt.setString(1, title);
+			pStmt.setString(2, city);
+			ResultSet rSet = pStmt.executeQuery();	
+			System.out.println("inside dao.searchJobs.try");
+			
+			while(rSet.next()) {//if rSet has something in it
+				System.out.println("inside dao.searchJobs.while");
+				JobBean job = new JobBean();	
+				
+				job.setJobId(rSet.getInt("jobID"));
+				job.setEmployerId(rSet.getInt("employerID"));
+				job.setTitle(rSet.getString("title"));
+				job.setCity(rSet.getString("city"));
+				job.setAddress(rSet.getString("address"));
+				job.setNumOfPosition(rSet.getInt("numOfPosition"));
+				job.setDescription(rSet.getString("description"));
+				job.setQualification(rSet.getString("qualification"));
+				job.setPostingDate(rSet.getDate("postingDate"));
+				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setNote(rSet.getString("note"));
 				
 				jobs.add(job);
 			}
