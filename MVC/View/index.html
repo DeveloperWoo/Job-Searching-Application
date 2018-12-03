@@ -6,21 +6,26 @@
 </head>
 <body>
 <h1>Student Job Search</h1>
-<form action = "JobSearch" method = "get">
-	<label>What: <label>
-    <input type = "text" name = "jobtitle" placeholder="Job title, Keywords,or Company" style="width: 250px;"/> <br/>
-        
-    <label> Where</label></br>   
-    <input type = "checkbox" name = "location" value = "location1"/>Mississauga<br/>
-    <input type = "checkbox" name = "location" value = "location2"/>Oakville<br/>
-    <input type = "checkbox" name = "location" value = "location3"/>Brampton<br/>
-    <input type = "checkbox" name = "location" value = "location4"/>Toronto<br/>
-  
-    <input type = "submit" value = "Find job"/> <br/>   
+<form action = "JobController" method = "get">
+<input type="hidden" name="action" value="search">
+	<label>What: </label>
+    <input type = "text" name = "title" placeholder="Job title, Keywords,or Company" style="width: 250px;"/> 
+
+    <label> Where: </label>
+    <select name="city">
+  		<option value="Mississauga">Mississauga</option>
+  		<option value="Oakville">Oakville</option>
+  		<option value="Brampton">Brampton</option>
+  		<option value="Toronto">Toronto</option>
+	</select> 
+    
+    <input type = "submit" value="Find job"> <br/>
 </form>
 
+<br><br><br>
+
 <form action = "emLogin.jsp">
-	<input type = "submit" name = "postJob" value = "postJob"/>Post a job<br/>
+	<input type = "submit" value="Post a Job"><br/>
 </form>
 
 </body>
