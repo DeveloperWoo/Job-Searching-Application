@@ -77,12 +77,6 @@ public class EmployerController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("in doPost");
 		doGet(request, response);
-		
-//		List<EmployerBean> employers = dao.getAllEmployers();
-//		request.setAttribute("employer", employers);
-//		
-//		RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
-//		view.forward(request, response);
 	}
 
 }
