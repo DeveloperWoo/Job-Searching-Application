@@ -185,7 +185,7 @@ public class JobDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM jobs WHERE title = ? AND city = ?");
+			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM jobs WHERE title =? AND city=?");
 			pStmt.setString(1, title);
 			pStmt.setString(2, city);
 			ResultSet rSet = pStmt.executeQuery();	
@@ -220,3 +220,4 @@ public class JobDAO {
 	}
 	
 }
+
