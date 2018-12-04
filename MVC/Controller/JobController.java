@@ -82,7 +82,7 @@ public class JobController extends HttpServlet {
 			//Search jobs based on user's input(job title, city)
 			request.setAttribute("jobs", dao.searchJobs(title, city));
 			
-			RequestDispatcher view = request.getRequestDispatcher("jobList.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("JobList.jsp");
 			view.forward(request, response);
 		}else // more actions should be added later: delete, detail, edit
 		{ 
