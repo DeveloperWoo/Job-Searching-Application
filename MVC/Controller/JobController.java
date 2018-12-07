@@ -84,10 +84,14 @@ public class JobController extends HttpServlet {
 			
 			RequestDispatcher view = request.getRequestDispatcher("JobList.jsp");
 			view.forward(request, response);
-		}else // more actions should be added later: delete, detail, edit
-		{ 
+		}else if(action.equals("delete")){
+		
+		}else if(action.equals("detail"){
+			
+		}else{// edit
 			
 		}
+
 	}
 
 
