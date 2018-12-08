@@ -15,8 +15,8 @@ public class JobBean implements Serializable{
 	private int	numOfPosition;
 	private String description;
 	private String qualification;
-	private Date postingDate;
-	private Date closingDate;
+	private String postingDate;
+	private String closingDate;
 	private String note;
 	
 	public JobBean() {
@@ -87,19 +87,19 @@ public class JobBean implements Serializable{
 		this.qualification = qualification;
 	}
 
-	public Date getPostingDate() {
+	public String getPostingDate() {
 		return postingDate;
 	}
 
-	public void setPostingDate(Date postingDate) {
+	public void setPostingDate(String postingDate) {
 		this.postingDate = postingDate;
 	}
 
-	public Date getClosingDate() {
+	public String getClosingDate() {
 		return closingDate;
 	}
 
-	public void setClosingDate(Date closingDate) {
+	public void setClosingDate(String closingDate) {
 		this.closingDate = closingDate;
 	}
 
