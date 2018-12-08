@@ -84,14 +84,15 @@ public class JobController extends HttpServlet {
 			
 			RequestDispatcher view = request.getRequestDispatcher("JobList.jsp");
 			view.forward(request, response);
-		}else if(action.equals("delete")){
-		
-		}else if(action.equals("detail"){
-			
-		}else{// edit
-			
 		}
-
+		
+		else if(action.equalsIgnoreCase("detail")) // more actions should be added later: delete, detail, edit
+		{ 
+			int jobId = Integer.parseInt(request.getParameter("jobId"));
+			request.setAttribute("jobdetail",dao.getJobById(jobId));
+			RequestDispatcher view = request.getRequestDispatcher("JobDetail.jsp");
+			view.forward(request, response);
+		}
 	}
 
 
