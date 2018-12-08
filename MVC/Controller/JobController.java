@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import Model.EmployerBean;
 import Model.JobBean;
 import DAO.JobDAO;
 
@@ -40,37 +41,48 @@ public class JobController extends HttpServlet {
 			int numOfPosition = Integer.parseInt(request.getParameter("numOfPosition"));
 			String description = request.getParameter("description");
 			String qualification = request.getParameter("qualification");
+			String note = request.getParameter("note");
+			String postingDate = request.getParameter("postingdate");
+			String closingDate = request.getParameter("closingdate");
 			
-			Date postingDate;
-			try {
-				postingDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("postingDate"));
-				job.setPostingDate(postingDate);
-				
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			Date closingDate;
-			try {
-				closingDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("closingDate"));
-				job.setClosingDate(closingDate);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			int employerId =  Integer.parseInt(request.getParameter("employerId"));
+//			String eName = request.getParameter("employerName");
 
+//			Date postingDate = null;
+//			try {
+//
+//				postingDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("postingDate"));
+//				job.setPostingDate(postingDate);
+//				
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+//			
+//			Date closingDate = null;
+//			try {
+//				closingDate = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("closingDate"));
+//				job.setClosingDate(closingDate);
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+
+			job.setEmployerId(employerId);
 			job.setTitle(title);
 			job.setCity(city);
 			job.setAddress(address);
 			job.setNumOfPosition(numOfPosition);
 			job.setDescription(description);
 			job.setDescription(qualification);
+			job.setNote(note);
+			job.setPostingDate(postingDate);
+			job.setClosingDate(closingDate);
 			
 			dao.addJob(job); // update the table
-			request.setAttribute("job", dao.getJobById(job.getJobId())); //send the job object we just created
+			request.setAttribute("jobdetail", dao.getJobById(job.getJobId())); //send the job object we just created
+//			request.setAttribute("eName", eName);
 			
-			RequestDispatcher view = request.getRequestDispatcher("jobDetail.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("JobDetail.jsp");
 			view.forward(request, response);
-
 			
 		}
 		else if(action.equals("search")) 
