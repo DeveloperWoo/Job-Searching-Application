@@ -40,6 +40,7 @@ public class EmployerDAO {
 			pStmt.setString(7, employer.getPassword());
 			
 			pStmt.executeUpdate();
+			
 			if(pStmt.executeUpdate() != 0) {
 				System.out.println("new employer is added");
 			}else {
@@ -53,9 +54,7 @@ public class EmployerDAO {
 		}
 	}
 	public EmployerBean getEmployer(String username, String password) {
-		
-		
-		
+	
 		System.out.println("method: getEmployer");
 		Connection conn = null;
 		EmployerBean em = new EmployerBean();
@@ -64,19 +63,25 @@ public class EmployerDAO {
 			System.out.println("DAO getconnect");
 			conn = DBUtil.getConnection();
 			System.out.println("DAO finish connect");
-//			String sql = "SELECT * FROM employers WHERE username = ? AND password = ?";
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM employers WHERE username = ?");
+			String sql = "SELECT * FROM employers WHERE username = ? AND password = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
-//			pstmt.setString(2, password);
+			pstmt.setString(2, password);
 			
 			ResultSet rSet = pstmt.executeQuery();
 			
 			System.out.println("inside try");
-			while(rSet.next()) {				
+			
+			if(rSet.next()) { //if the employer exists				
 				System.out.println("inside while");
 				//em only has the values of emplyerID and eName
 				em.setEmployerId(rSet.getInt("employerID"));
 				em.setEName(rSet.getString("eName"));
+				em.setAboutUs(rSet.getString("aboutUs"));
+				em.setAddress(rSet.getString("address"));
+				em.setContact(rSet.getString("contact"));
+				em.setPassword(rSet.getString("password"));
+				em.setUsername(rSet.getString("username"));
 			}
 			
 		}
@@ -87,7 +92,7 @@ public class EmployerDAO {
 			DBUtil.closeConnection(conn);
 		}
 		
-		return em;
+		return em; //this employer object contains (id, name)
 	}
 	
 	public List<EmployerBean> getAllEmployers(){

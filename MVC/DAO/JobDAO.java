@@ -27,8 +27,8 @@ public class JobDAO {
 			PreparedStatement pstmt = conn.prepareStatement(
 					"INSERT INTO jobs"
 					+ "(employerID, title, city, address, numOfPosition, "
-					+ "description, qualification, postingDate, closingDate, note)"
-					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");  //10, jobID will be automatically set with next value
+					+ "description, qualification,postingDate, closingDate, note)"
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?)");  //10, jobID will be automatically set with next value
 			pstmt.setInt(1, job.getEmployerId());
 			pstmt.setString(2, job.getTitle());
 			pstmt.setString(3, job.getCity());
@@ -36,8 +36,10 @@ public class JobDAO {
 			pstmt.setInt(5, job.getNumOfPosition());
 			pstmt.setString(6, job.getDescription());
 			pstmt.setString(7, job.getQualification());
-			pstmt.setDate(8, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
-			pstmt.setDate(9, new java.sql.Date(job.getClosingDate().getTime())); //
+			pstmt.setString(8, job.getPostingDate());
+			pstmt.setString(9, job.getClosingDate());
+//			pstmt.setDate(8, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
+//			pstmt.setDate(9, new java.sql.Date(job.getClosingDate().getTime())); //
 			pstmt.setString(10, job.getNote());	
 			
 			pstmt.executeUpdate();
@@ -91,8 +93,10 @@ public class JobDAO {
 			pstmt.setInt(4, job.getNumOfPosition());
 			pstmt.setString(5, job.getDescription());
 			pstmt.setString(6, job.getQualification());
-			pstmt.setDate(7, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
-			pstmt.setDate(8, new java.sql.Date(job.getClosingDate().getTime())); //
+//			pstmt.setDate(7, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
+//			pstmt.setDate(8, new java.sql.Date(job.getClosingDate().getTime())); //
+			pstmt.setString(7, job.getPostingDate());
+			pstmt.setString(8, job.getClosingDate());
 			pstmt.setString(9, job.getNote());
 			
 			pstmt.executeUpdate();
@@ -125,8 +129,10 @@ public class JobDAO {
 				job.setNumOfPosition(rSet.getInt("numOfPosition"));
 				job.setDescription(rSet.getString("description"));
 				job.setQualification(rSet.getString("qualification"));
-				job.setPostingDate(rSet.getDate("postingDate"));
-				job.setClosingDate(rSet.getDate("closingDate"));
+//				job.setPostingDate(rSet.getDate("postingDate"));
+//				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setPostingDate(rSet.getString("postingDate"));
+				job.setClosingDate(rSet.getString("closingDate"));
 				job.setNote(rSet.getString("note"));
 				
 				jobs.add(job);
@@ -163,8 +169,10 @@ public class JobDAO {
 				job.setNumOfPosition(rSet.getInt("numOfPosition"));
 				job.setDescription(rSet.getString("description"));
 				job.setQualification(rSet.getString("qualification"));
-				job.setPostingDate(rSet.getDate("postingDate"));
-				job.setClosingDate(rSet.getDate("closingDate"));
+//				job.setPostingDate(rSet.getDate("postingDate"));
+//				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setPostingDate(rSet.getString("postingDate"));
+				job.setClosingDate(rSet.getString("closingDate"));
 				job.setNote(rSet.getString("note"));
 			}
 		}
@@ -203,8 +211,10 @@ public class JobDAO {
 				job.setNumOfPosition(rSet.getInt("numOfPosition"));
 				job.setDescription(rSet.getString("description"));
 				job.setQualification(rSet.getString("qualification"));
-				job.setPostingDate(rSet.getDate("postingDate"));
-				job.setClosingDate(rSet.getDate("closingDate"));
+//				job.setPostingDate(rSet.getDate("postingDate"));
+//				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setPostingDate(rSet.getString("postingDate"));
+				job.setClosingDate(rSet.getString("closingDate"));
 				job.setNote(rSet.getString("note"));
 				
 				jobs.add(job);
@@ -220,4 +230,3 @@ public class JobDAO {
 	}
 	
 }
-
