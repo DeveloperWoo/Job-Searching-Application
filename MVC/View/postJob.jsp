@@ -37,7 +37,7 @@
 <label>Description</label><br>
 <input type = "text" name = "description"/><br>
 <label>Qualifications</label></br>
-<input type = "text" name = "qualifications"/><br>
+<input type = "text" name = "qualification"/><br>
 <label>Posting Date</label></br>
 <input type = "date" name = "postingdate"/> <br>
 <label>Closing Date</label><br>
