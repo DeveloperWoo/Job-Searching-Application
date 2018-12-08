@@ -10,6 +10,7 @@
 <h2>Please Post a Job</h2>
 <form action = "JobController"  method ="Post">
 <input type="hidden" name="action" value="post">
+<input type="hidden" name="employerId" value="${employer.employerId}">
 <label>Title</label><br>
 <input type = "text" name = "title"/><br>
 <label>City</label><br>
@@ -38,10 +39,12 @@
 <input type = "text" name = "description"/><br>
 <label>Qualifications</label></br>
 <input type = "text" name = "qualification"/><br>
-<label>Posting Date</label></br>
-<input type = "date" name = "postingdate"/> <br>
+<label>Note</label></br>
+<input type = "text" name = "note"/><br>
+<label>Posting Date</label><br>
+<input type = "text" name = "postingdate"/><br>
 <label>Closing Date</label><br>
-<input type = "date" name = "closingdate"/> <br></br>
+<input type = "text" name = "closingdate"/><br>
 <input type = "submit" value = "Post Job"/>
 
 </form>

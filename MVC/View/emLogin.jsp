@@ -8,9 +8,16 @@
 </head>
 <body>
 	<form action="EmployerController" method="post">
+	<input type="hidden" name="action" value="login">
 		User name: <input type="text" name="username"><br>
 		Password: <input type="password" name="password"><br> 
 		<input type="submit" value="Sign In">
+	</form>
+	<br>
+	<form action="EmployerController" method="post">
+	<input type="hidden" name="action" value="newAccount">
+		You don't have an account yet? 
+		<input type="submit" value="Create an account">
 	</form>
 </body>
 </html>
