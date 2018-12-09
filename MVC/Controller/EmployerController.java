@@ -9,24 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.EmployerDAO;
-import DAO.JobDAO;
 import Model.EmployerBean;
-import Model.JobBean;
 
 @WebServlet("/EmployerController")
 public class EmployerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private EmployerDAO emDao = new EmployerDAO();
-	private JobDAO jobDao = new JobDAO();
        
     public EmployerController() {
         super();
         emDao = new EmployerDAO();
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("in doGet");
@@ -40,7 +37,10 @@ public class EmployerController extends HttpServlet {
 			
 			try {
 				EmployerBean em = emDao.getEmployer(username, password); //em contains every info about the employer
-				request.setAttribute("employer", em);
+				System.out.println("The website of this company is " + em.getWebsite());
+				HttpSession session = request.getSession();
+				session.setAttribute("employer", em);
+
 				
 				RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
 				view.forward(request, response);
@@ -62,28 +62,14 @@ public class EmployerController extends HttpServlet {
 			String website = request.getParameter("website");
 			
 			EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
-			emDao.addEmployer(em);				
+			emDao.addEmployer(em);
 			
 			RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
 			view.forward(request, response);
-		}else { 
+		}else { // action.equalsIgnoreCase("")
 		
-			
-			
 		}
-			
-//			try {
-//				EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
-//				dao.addEmployer(em);				
-//				
-//				RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
-//				view.forward(request, response);
-//			}catch(NullPointerException e) {
-//				e.getMessage();
-//				System.out.println("NullPointerException");
-//			}
-		}
-
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("in doPost");
