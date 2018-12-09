@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Model.EmployerBean;
+import Model.JobBean;
 import Util.DBUtil;
 
 public class EmployerDAO {
@@ -24,9 +25,7 @@ public class EmployerDAO {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			
-		
-			
+
 			String sql = "INSERT INTO employers (eName, address, contact, aboutUs, website, username, password)"
 					+ "VALUES(?,?,?,?,?,?,?)";
 			
@@ -53,9 +52,10 @@ public class EmployerDAO {
 			DBUtil.closeConnection(conn);
 		}
 	}
+	
 	public EmployerBean getEmployer(String username, String password) {
 	
-		System.out.println("method: getEmployer");
+		System.out.println("method: getEmployer using username and password");
 		Connection conn = null;
 		EmployerBean em = new EmployerBean();
 		
@@ -74,12 +74,13 @@ public class EmployerDAO {
 			
 			if(rSet.next()) { //if the employer exists				
 				System.out.println("inside while");
-				//em only has the values of emplyerID and eName
+				
 				em.setEmployerId(rSet.getInt("employerID"));
 				em.setEName(rSet.getString("eName"));
 				em.setAboutUs(rSet.getString("aboutUs"));
 				em.setAddress(rSet.getString("address"));
 				em.setContact(rSet.getString("contact"));
+				em.setWebsite(rSet.getString("website"));
 				em.setPassword(rSet.getString("password"));
 				em.setUsername(rSet.getString("username"));
 			}
@@ -92,8 +93,89 @@ public class EmployerDAO {
 			DBUtil.closeConnection(conn);
 		}
 		
-		return em; //this employer object contains (id, name)
+		return em;
 	}
+	
+	public EmployerBean getEmployer1(int jobId) {
+		System.out.println("method: getEmployer using jobId");
+		Connection conn = null;
+		EmployerBean em = new EmployerBean();
+		
+		try {
+			System.out.println("DAO getconnect");
+			conn = DBUtil.getConnection();
+			System.out.println("DAO finish connect");
+			
+			//get an employer using jobId
+			String sql = "SELECT * FROM employers WHERE employerID = (SELECT employerID FROM jobs WHERE jobID = ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, jobId);		
+			System.out.println(pstmt);
+			ResultSet rSet = pstmt.executeQuery(); //will hold one employer
+			
+			System.out.println("inside try");
+			
+			if(rSet.next()) { //if the job exists				
+				System.out.println("inside while");
+					em.setEmployerId(rSet.getInt("employerID"));
+					em.setEName(rSet.getString("eName"));
+					em.setAboutUs(rSet.getString("aboutUs"));
+					em.setAddress(rSet.getString("address"));
+					em.setContact(rSet.getString("contact"));
+					em.setWebsite(rSet.getString("website"));
+					em.setPassword(rSet.getString("password"));
+					em.setUsername(rSet.getString("username"));
+			}	
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.closeConnection(conn);
+		}
+		return em;
+	}
+	
+	
+	public EmployerBean getEmployer2(int employerId) {
+		System.out.println("method: getEmployer using employerId");
+		Connection conn = null;
+		EmployerBean em = new EmployerBean();
+		
+		try {
+			System.out.println("DAO getconnect");
+			conn = DBUtil.getConnection();
+			System.out.println("DAO finish connect");
+			
+			//get an employer using jobId
+			String sql = "SELECT * FROM employers WHERE emplyerID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, employerId);			
+			ResultSet rSet = pstmt.executeQuery(); //will hold one employer
+			
+			System.out.println("inside try");
+			
+			if(rSet.next()) { //if the job exists				
+				System.out.println("inside while");
+					em.setEmployerId(rSet.getInt("employerID"));
+					em.setEName(rSet.getString("eName"));
+					em.setAboutUs(rSet.getString("aboutUs"));
+					em.setAddress(rSet.getString("address"));
+					em.setContact(rSet.getString("contact"));
+					em.setWebsite(rSet.getString("website"));
+					em.setPassword(rSet.getString("password"));
+					em.setUsername(rSet.getString("username"));
+			}	
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.closeConnection(conn);
+		}
+		return em;
+	}
+	
 	
 	public List<EmployerBean> getAllEmployers(){
 		Connection conn = null;
