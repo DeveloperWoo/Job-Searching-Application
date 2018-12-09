@@ -1,3 +1,4 @@
+<%@page import="Model.EmployerBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,6 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+EmployerBean em = (EmployerBean) request.getSession().getAttribute("employer");
+String eName = em.getEName();
+%>
+<h1>Welcome <%=eName%></h1>
 <h2>Please Post a Job</h2>
 <form action = "JobController"  method ="Post">
 <input type="hidden" name="action" value="post">
@@ -44,7 +50,7 @@
 <label>Posting Date</label><br>
 <input type = "text" name = "postingdate"/><br>
 <label>Closing Date</label><br>
-<input type = "text" name = "closingdate"/><br>
+<input type = "text" name = "closingdate"/><br><br>
 <input type = "submit" value = "Post Job"/>
 
 </form>

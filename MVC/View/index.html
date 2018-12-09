@@ -19,13 +19,18 @@
   		<option value="Toronto">Toronto</option>
 	</select> 
     
-    <input type = "submit" value="Find job"> <br/>
+    <input type = "submit" value="Find job">
+</form>
+<br>
+<form action = "JobController">
+	<input type="hidden" name="action" value="allJobs">
+	<input type = "submit" value="All Jobs"><br/>
 </form>
 
 <br><br><br>
 
 <form action = "emLogin.jsp">
-	<input type = "submit" value="Post a Job"><br/>
+	Are you an employer? <input type = "submit" value="Post a Job"><br/>
 </form>
 
 </body>

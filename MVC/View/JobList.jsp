@@ -26,11 +26,11 @@
 		<tbody>
 			<c:forEach items="${jobs}" var="jobs">
 				<tr>
-					<td><c:out value="${jobs.jobId}"></c:out></td>
+					<td><a href="JobController?action=detail&jobId=${jobs.jobId}"><c:out value="${jobs.jobId}"></c:out></a></td>
 					<td><c:out value="${jobs.title}"></c:out></td>
 					<td><c:out value="${jobs.city}"></c:out></td>
-					<td><fmt:formatDate value="${jobs.postingDate }" pattern="yyyy-MM-dd" /></td>
-					<td><fmt:formatDate value="${jobs.closingDate }" pattern="yyyy-MM-dd" /></td>
+					<td><c:out value="${jobs.postingDate}"></c:out></td>
+					<td><c:out value="${jobs.closingDate}"></c:out></td>
 				</tr>
 			</c:forEach>
 		</tbody>
