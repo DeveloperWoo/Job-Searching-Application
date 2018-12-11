@@ -23,8 +23,14 @@ a{
 }
 </style>
 <body>
+
+<%
+EmployerBean em = (EmployerBean) request.getSession().getAttribute("employer");
+String eName = em.getEName();
+%>
+
 <h2>Company Detail</h2>
-Name: ${eName }<br>
+Name:<%=eName%><br>
 Address: ${employer.address }<br>
 Contact: ${employer.contact }<br>
 About Us: ${employer.aboutUs }<br>
