@@ -89,7 +89,7 @@ public class JobController extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-		else if(action.equalsIgnoreCase("detail")) // more actions should be added later: delete, edit
+		else if(action.equalsIgnoreCase("detail")) // more actions should be added later: delete, edi
 		{ 
 			System.out.println("JobController: action = detail");
 			int jobId = Integer.parseInt(request.getParameter("jobId"));
