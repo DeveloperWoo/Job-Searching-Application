@@ -83,10 +83,10 @@ public class JobDAO {
 			conn = DBUtil.getConnection();
 			
 			PreparedStatement pstmt = conn.prepareStatement(
-					"UPDATE jobs SET"
-					+ "title = ?, city = ?, address = ?, numOfPosition = ?, "
-					+ "description = ?, qualification = ?, postingDate = ?, "
-					+ "closingDate = ?, note = ?");
+					"UPDATE jobs SET "
+					+ "title=?, city=?, address=?, numOfPosition=?, "
+					+ "description=?, qualification=?, postingDate=?, "
+					+ "closingDate=?, note=? where jobID=?");
 
 			pstmt.setString(1, job.getTitle());
 			pstmt.setString(2, job.getCity());
@@ -94,11 +94,10 @@ public class JobDAO {
 			pstmt.setInt(4, job.getNumOfPosition());
 			pstmt.setString(5, job.getDescription());
 			pstmt.setString(6, job.getQualification());
-//			pstmt.setDate(7, new java.sql.Date(job.getPostingDate().getTime())); //Check later!!
-//			pstmt.setDate(8, new java.sql.Date(job.getClosingDate().getTime())); //
 			pstmt.setString(7, job.getPostingDate());
 			pstmt.setString(8, job.getClosingDate());
 			pstmt.setString(9, job.getNote());
+			pstmt.setInt(10, job.getJobId());
 			
 			pstmt.executeUpdate();
 		}
@@ -185,6 +184,48 @@ public class JobDAO {
 		}
 		System.out.println("will return job object");
 		return job;
+		
+	}
+	
+	public List<JobBean> getJobByEmployerId(int EmpId){
+		Connection conn = null;
+		List<JobBean> jobs = new ArrayList<JobBean>();	
+		
+		try {
+			conn = DBUtil.getConnection();
+			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM jobs WHERE employerID = ?");
+			pStmt.setInt(1, EmpId);
+			ResultSet rSet = pStmt.executeQuery();	
+			System.out.println("inside dao.getJobById.try");
+			
+			while(rSet.next()) {//if rSet has something in it
+				System.out.println("inside dao.getJobById.while");
+				JobBean job = new JobBean();		
+				job.setJobId(rSet.getInt("jobID"));
+				job.setEmployerId(rSet.getInt("employerID"));
+				job.setTitle(rSet.getString("title"));
+				job.setCity(rSet.getString("city"));
+				job.setAddress(rSet.getString("address"));
+				job.setNumOfPosition(rSet.getInt("numOfPosition"));
+				job.setDescription(rSet.getString("description"));
+				job.setQualification(rSet.getString("qualification"));
+//				job.setPostingDate(rSet.getDate("postingDate"));
+//				job.setClosingDate(rSet.getDate("closingDate"));
+				job.setPostingDate(rSet.getString("postingDate"));
+				job.setClosingDate(rSet.getString("closingDate"));
+				job.setNote(rSet.getString("note"));
+				
+				jobs.add(job);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.closeConnection(conn);
+		}
+		System.out.println("will return job by this particular employee");
+		return jobs;
 		
 	}
 	
