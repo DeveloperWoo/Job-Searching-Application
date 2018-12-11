@@ -27,7 +27,7 @@ public class EmployerController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("in doGet");
-		
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		
 		if(action.equalsIgnoreCase("login")) {
@@ -38,11 +38,11 @@ public class EmployerController extends HttpServlet {
 			try {
 				EmployerBean em = emDao.getEmployer(username, password); //em contains every info about the employer
 				System.out.println("The website of this company is " + em.getWebsite());
-				HttpSession session = request.getSession();
+				//HttpSession session = request.getSession();
 				session.setAttribute("employer", em);
 
 				
-				RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("PostJob.jsp");
 				view.forward(request, response);
 			}
 			catch(NullPointerException e) {
@@ -52,6 +52,7 @@ public class EmployerController extends HttpServlet {
 		}else if(action.equalsIgnoreCase("newAccount")) {
 			RequestDispatcher view = request.getRequestDispatcher("emCreateAccount.jsp");
 			view.forward(request, response);
+			
 		}else if(action.equalsIgnoreCase("createAccount")) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -63,8 +64,9 @@ public class EmployerController extends HttpServlet {
 			
 			EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
 			emDao.addEmployer(em);
+			session.setAttribute("employer", emDao.getEmployer(username, password));
 			
-			RequestDispatcher view = request.getRequestDispatcher("postJob.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("PostJob.jsp");
 			view.forward(request, response);
 		}else { // action.equalsIgnoreCase("")
 		
@@ -77,3 +79,4 @@ public class EmployerController extends HttpServlet {
 	}
 
 }
+
