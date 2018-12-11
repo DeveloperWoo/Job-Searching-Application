@@ -32,6 +32,7 @@ public class JobController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
 //		JobBean job = new JobBean();
 		
 		if(action.equals("post")) {
@@ -47,7 +48,6 @@ public class JobController extends HttpServlet {
 			String postingDate = request.getParameter("postingdate");
 			String closingDate = request.getParameter("closingdate");
 			
-			HttpSession session = request.getSession();
 			EmployerBean em = (EmployerBean)session.getAttribute("employer");
 			int employerId = em.getEmployerId();
 
@@ -75,7 +75,74 @@ public class JobController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("JobDetail.jsp");
 			view.forward(request, response);
 			
+		}	
+		else if(action.equalsIgnoreCase("update")) {
+			JobBean job = new JobBean();
+			
+			int jobId = Integer.parseInt(request.getParameter("jobId"));
+			String title = request.getParameter("title");
+			String city = request.getParameter("city");
+			String address = request.getParameter("address");
+			int numOfPosition = Integer.parseInt(request.getParameter("numOfPosition"));
+			String description = request.getParameter("description");
+			String qualification = request.getParameter("qualification");
+			String note = request.getParameter("note");
+			String postingDate = request.getParameter("postingdate");
+			String closingDate = request.getParameter("closingdate");
+			
+			EmployerBean em = (EmployerBean)session.getAttribute("employer");
+			int employerId = em.getEmployerId();
+			job.setJobId(jobId);
+			job.setEmployerId(employerId);
+			job.setTitle(title);
+			job.setCity(city);
+			job.setAddress(address);
+			job.setNumOfPosition(numOfPosition);
+			job.setDescription(description);
+			job.setQualification(qualification);
+			job.setNote(note);
+			job.setPostingDate(postingDate);
+			job.setClosingDate(closingDate);
+			
+			System.out.println("This job is ");
+			job.toString();
+			
+			dao.updateJob(job);
+			System.out.print("updated job bean in table");// update the table
+			request.setAttribute("jobdetail", dao.getJobById(jobId));
+			System.out.println("Updated Job is: " + dao.getJobById(jobId));
+			RequestDispatcher view = request.getRequestDispatcher("UpdatedJob.jsp");
+			view.forward(request, response);
+			
 		}
+		
+		else if(action.equalsIgnoreCase("delete")) {
+			
+			int jobId = Integer.parseInt(request.getParameter("jobId"));
+			
+			JobBean job = new JobBean();
+			job = dao.getJobById(jobId);
+			
+			EmployerBean em = new EmployerBean();
+			em = emdao.getEmployer1(jobId);
+			System.out.println("Company name: " + em.getEName());
+			
+			request.setAttribute("jobdetail", job);
+			request.setAttribute("employer", em);
+			
+			RequestDispatcher view = request.getRequestDispatcher("DeleteConfirm.jsp");
+			view.forward(request, response);
+			
+		}
+		
+		else if(action.equalsIgnoreCase("deleteconfirmed")) {
+			
+			int jobId = Integer.parseInt(request.getParameter("jobId"));
+			dao.deleteJob(jobId);
+			System.out.println("jobDeleted:");
+			response.sendRedirect("EmployerController?action=afterupdate");
+		}
+		
 		else if(action.equals("search")) 
 		{
 			//Get job title and city
@@ -89,7 +156,7 @@ public class JobController extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-		else if(action.equalsIgnoreCase("detail")) // more actions should be added later: delete, edi
+		else if(action.equalsIgnoreCase("detail")) // more actions should be added later: delete, edit
 		{ 
 			System.out.println("JobController: action = detail");
 			int jobId = Integer.parseInt(request.getParameter("jobId"));
@@ -107,6 +174,7 @@ public class JobController extends HttpServlet {
 			
 			RequestDispatcher view = request.getRequestDispatcher("JobDetail.jsp");
 			view.forward(request, response);
+			
 		}else if(action.equalsIgnoreCase("allJobs")) {
 			System.out.println("JobController: action = allJobs");
 			
@@ -116,6 +184,20 @@ public class JobController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("JobList.jsp");
 			view.forward(request, response);
 		}
+		
+		else if(action.equalsIgnoreCase("edit")) {
+			int jobId = (Integer.parseInt(request.getParameter("jobId")));
+			JobBean jobBean = dao.getJobById(jobId);
+			System.out.println(jobBean.toString());
+			request.setAttribute("job", jobBean);
+			System.out.print("jobId:" + jobBean.getJobId());
+			RequestDispatcher rd = request.getRequestDispatcher("UpdateJob.jsp");
+			rd.forward(request, response);
+			
+			//dao.updateJob(jobBean);
+			System.out.println("jobBean Updated:");
+		}
+		
 	}
 
 
