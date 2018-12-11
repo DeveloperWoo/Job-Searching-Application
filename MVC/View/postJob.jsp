@@ -11,8 +11,10 @@
 <%
 EmployerBean em = (EmployerBean) request.getSession().getAttribute("employer");
 String eName = em.getEName();
+int eId = em.getEmployerId();
 %>
 <h1>Welcome <%=eName%></h1>
+<h2>EmployerId <%=eId%></h2>
 <h2>Please Post a Job</h2>
 <form action = "JobController"  method ="Post">
 <input type="hidden" name="action" value="post">
