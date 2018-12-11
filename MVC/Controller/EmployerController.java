@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.EmployerDAO;
+import DAO.JobDAO;
 import Model.EmployerBean;
 
 @WebServlet("/EmployerController")
@@ -19,10 +20,12 @@ public class EmployerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private EmployerDAO emDao = new EmployerDAO();
+	private JobDAO jobDao = new JobDAO();
        
     public EmployerController() {
         super();
         emDao = new EmployerDAO();
+        jobDao = new JobDAO();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +33,7 @@ public class EmployerController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		
+
 		if(action.equalsIgnoreCase("login")) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -39,17 +43,31 @@ public class EmployerController extends HttpServlet {
 				EmployerBean em = emDao.getEmployer(username, password); //em contains every info about the employer
 				System.out.println("The website of this company is " + em.getWebsite());
 				//HttpSession session = request.getSession();
+				
+				int empId = em.getEmployerId();
+				request.setAttribute("jobs",jobDao.getJobByEmployerId(empId));
+				
 				session.setAttribute("employer", em);
 
 				
-				RequestDispatcher view = request.getRequestDispatcher("PostJob.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("EmpJobList.jsp");
 				view.forward(request, response);
 			}
 			catch(NullPointerException e) {
 				e.getMessage();
 				System.out.println("NullPointerException");
 			}
-		}else if(action.equalsIgnoreCase("newAccount")) {
+		}
+			else if(action.equalsIgnoreCase("afterupdate")) {
+				EmployerBean em = (EmployerBean) session.getAttribute("employer");
+				int empId = em.getEmployerId();
+				request.setAttribute("jobs",jobDao.getJobByEmployerId(empId));
+				RequestDispatcher view = request.getRequestDispatcher("EmpJobList.jsp");
+				view.forward(request, response);
+				
+			}
+		
+		else if(action.equalsIgnoreCase("newAccount")) {
 			RequestDispatcher view = request.getRequestDispatcher("emCreateAccount.jsp");
 			view.forward(request, response);
 			
@@ -79,4 +97,3 @@ public class EmployerController extends HttpServlet {
 	}
 
 }
-
