@@ -8,14 +8,10 @@
 <meta charset="utf-8">
 <title>Job List</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .bg-4 {
 	background-color: #2f2f2f; /* Black Gray */
@@ -44,23 +40,17 @@ th{
 </style>
 </head>
 <body>
-	<!-- Navbar -->
-	<nav class="navbar navbar-default">
-	<div class="container-fluid bg-4 text-center">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html">Home</a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
+	<!-- navigation -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="index.html">Home</a></li>
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<a href="emLogin.jsp">Login</a>
+				<li><a href="emCreateAccount.jsp"><span	class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="emLogin.jsp"><span	class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			</ul>
 		</div>
-	</div>
 	</nav>
 
 	<div class="container-fluid-body">
@@ -82,9 +72,11 @@ th{
 						<tbody>
 							<c:forEach items="${jobs}" var="jobs">
 								<tr>
-									<td><a
-										href="JobController?action=detail&jobId=${jobs.jobId}"><c:out
-												value="${jobs.jobId}"></c:out></a></td>
+									<td>
+										<a href="JobController?action=detail&jobId=${jobs.jobId}">
+										<c:out value="${jobs.jobId}"></c:out>
+										</a>
+									</td>
 									<td><c:out value="${jobs.title}"></c:out></td>
 									<td><c:out value="${jobs.city}"></c:out></td>
 									<td><c:out value="${jobs.postingDate}"></c:out></td>
