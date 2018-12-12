@@ -5,35 +5,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Job List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.bg-4 {
+	background-color: #2f2f2f; /* Black Gray */
+	color: #fff;
+}
+
+.container-fluid {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+body {
+	text-align: center;
+}
+
+p {
+	font-size: 16px;
+}
+th{
+	text-align: center;
+}
+.container-fluid-body{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+</style>
 </head>
 <body>
-	<table border=2>
-		<thead>
-			<tr>
-				<th>JobID</th>
-				<th>JobTitle</th>
-				<th>City</th>
-				<th>PostingDate</th>
-				<th>ClosingDate</th>
-			</tr>
-		</thead>
-		<%
-			//set attribute named jobs in previous file
-			// to list all the jobs
-		%>
-		<tbody>
-			<c:forEach items="${jobs}" var="jobs">
-				<tr>
-					<td><a href="JobController?action=detail&jobId=${jobs.jobId}"><c:out value="${jobs.jobId}"></c:out></a></td>
-					<td><c:out value="${jobs.title}"></c:out></td>
-					<td><c:out value="${jobs.city}"></c:out></td>
-					<td><c:out value="${jobs.postingDate}"></c:out></td>
-					<td><c:out value="${jobs.closingDate}"></c:out></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<!-- Navbar -->
+	<nav class="navbar navbar-default">
+	<div class="container-fluid bg-4 text-center">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Home</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<a href="emLogin.jsp">Login</a>
+			</ul>
+		</div>
+	</div>
+	</nav>
+
+	<div class="container-fluid-body">
+		<div class="row">
+			<div class="col-sm-3"></div>
+
+			<div class="col-sm-6">
+				<div class="container-fluid">
+					<table class="table table-hover" >
+						<thead>
+							<tr>
+								<th>JobID</th>
+								<th>JobTitle</th>
+								<th>City</th>
+								<th>PostingDate</th>
+								<th>ClosingDate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${jobs}" var="jobs">
+								<tr>
+									<td><a
+										href="JobController?action=detail&jobId=${jobs.jobId}"><c:out
+												value="${jobs.jobId}"></c:out></a></td>
+									<td><c:out value="${jobs.title}"></c:out></td>
+									<td><c:out value="${jobs.city}"></c:out></td>
+									<td><c:out value="${jobs.postingDate}"></c:out></td>
+									<td><c:out value="${jobs.closingDate}"></c:out></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="container-fluid bg-4 text-center">
+	<p>PROG32758 Enterprise Java Development &copy; Sheridan College</p>
+	</footer>
 </body>
 </html>
