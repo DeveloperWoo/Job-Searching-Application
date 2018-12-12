@@ -62,11 +62,11 @@ th{
 					<table class="table table-hover" >
 						<thead>
 							<tr>
-								<th>JobID</th>
-								<th>JobTitle</th>
+								<th>Job ID</th>
+								<th>Job Title</th>
 								<th>City</th>
-								<th>PostingDate</th>
-								<th>ClosingDate</th>
+								<th>Posting Date</th>
+								<th>Closing Date</th>
 							</tr>
 						</thead>
 						<tbody>
