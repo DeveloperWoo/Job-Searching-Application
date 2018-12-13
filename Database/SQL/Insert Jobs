@@ -1,7 +1,6 @@
 use jobsearch;
 
 insert into jobs(employerID, title,city,address,numOfPosition,description,qualification,postingDate,closingDate,note)
-
 values(1 ,'Jr Analyst','Oakville','Alan Street,ON',1 ,'Major activites include solution documentation, solution estimation, solution design, solution configuration/development, solution continuous improvement and solution implementation','2 years Computer Science experience, Programming/Coding and SQL experience','2017-11-11','2018-07-12','WWW.TechCorp.ca'),
 (1,'IT Client Support Specialist','Toronto','Dennis RD,ON',5,'The IT Client Support Specialist provides technical support services to the OSC end-users in a timely, effective and professional manner','2-year diploma in Computer Science or any equivalent program, including knowlegde of all MS software applications',	'2015-02-01','2019-03-3,','WWW.MDG.com'),	
 (2,'HelpDesk Technician','Oakville','Teller RD,ON',	2 ,	'As a helpdesk Technician, you will get to convey your technical knowledge to our clients by providing superior technical support, troubleshooting and resolving both basic and advanced technical support requests',  'Microsoft Windows 7/8/10, Microsoft Office Products, Managing and suupporting office 365','2014-03-14','2015-07-03','WWW.ITExpress.com'),
