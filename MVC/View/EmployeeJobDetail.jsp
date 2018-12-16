@@ -91,7 +91,8 @@ Closing Date: ${jobdetail.closingDate }<br>
 ${jobdetail.address } <br>
 <br>
 </p>
-<h3><a href="${employer.website }"> Apply Now</a></h3>
+
+<h3><a href="http://${employer.website }"> Apply Now</a></h3>
 </div>
 <br>
 </div>
