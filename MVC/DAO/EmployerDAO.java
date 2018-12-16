@@ -59,20 +59,21 @@ public class EmployerDAO {
 		Connection conn = null;
 		EmployerBean em = new EmployerBean();
 		
+		
 		try {
 			System.out.println("DAO getconnect");
 			conn = DBUtil.getConnection();
 			System.out.println("DAO finish connect");
-			String sql = "SELECT * FROM employers WHERE username = ? AND password = ?";
+			String sql = "SELECT * FROM employers WHERE username = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
-			pstmt.setString(2, password);
+			//pstmt.setString(2, password);
 			
 			ResultSet rSet = pstmt.executeQuery();
 			
 			System.out.println("inside try");
 			
-			if(rSet.next()) { //if the employer exists				
+			while(rSet.next()) { //if the employer exists				
 				System.out.println("inside while");
 				
 				em.setEmployerId(rSet.getInt("employerID"));
