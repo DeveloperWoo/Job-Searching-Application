@@ -17,16 +17,13 @@
 	background-color: #2f2f2f; /* Black Gray */
 	color: #fff;
 }
-
 .container-fluid {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
-
 body {
 	text-align: center;
 }
-
 p {
 	font-size: 16px;
 }
@@ -58,6 +55,7 @@ th{
 			<div class="col-sm-3"></div>
 
 			<div class="col-sm-6">
+			<h1>You are the next innovator!</h1>
 				<div class="container-fluid">
 					<table class="table table-hover" >
 						<thead>
