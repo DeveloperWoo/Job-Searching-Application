@@ -169,10 +169,10 @@ public class JobController extends HttpServlet {
 			System.out.println("Company name: " + em.getEName());
 			
 			request.setAttribute("jobdetail", job);
-			request.setAttribute("employer", em);
-			request.setAttribute("eName", em.getEName());
+			session.setAttribute("employer", em);
+			//request.setAttribute("eName", em.getEName());
 			
-			RequestDispatcher view = request.getRequestDispatcher("JobDetail.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("EmployeeJobDetail.jsp");
 			view.forward(request, response);
 			
 		}else if(action.equalsIgnoreCase("allJobs")) {
