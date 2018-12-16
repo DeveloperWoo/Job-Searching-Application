@@ -58,6 +58,36 @@ public class EmployerController extends HttpServlet {
 				System.out.println("NullPointerException");
 			}
 		}
+		
+		else if(action.equalsIgnoreCase("firstlogin")) {
+//			String username = request.getParameter("username");
+//			String password = request.getParameter("password");
+//			System.out.println(username + password);
+			
+			try {
+				EmployerBean em = (EmployerBean)session.getAttribute("employer");
+				String username = em.getUsername();
+				String password = em.getPassword();
+				
+				EmployerBean em1 = emDao.getEmployer(username, password); //em contains every info about the employer
+				System.out.println("The website of this company is " + em.getWebsite());
+				//HttpSession session = request.getSession();
+				
+				int empId = em1.getEmployerId();
+				request.setAttribute("jobs",jobDao.getJobByEmployerId(empId));
+				
+				session.setAttribute("employer", em1);
+
+				
+				RequestDispatcher view = request.getRequestDispatcher("EmpJobList.jsp");
+				view.forward(request, response);
+			}
+			catch(NullPointerException e) {
+				e.getMessage();
+				System.out.println("NullPointerException");
+			}
+		}
+		
 			else if(action.equalsIgnoreCase("afterupdate")) {
 				EmployerBean em = (EmployerBean) session.getAttribute("employer");
 				int empId = em.getEmployerId();
@@ -71,7 +101,8 @@ public class EmployerController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("emCreateAccount.jsp");
 			view.forward(request, response);
 			
-		}else if(action.equalsIgnoreCase("createAccount")) {
+		}
+		else if(action.equalsIgnoreCase("createAccount")) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String eName = request.getParameter("eName");
@@ -80,14 +111,29 @@ public class EmployerController extends HttpServlet {
 			String aboutUs = request.getParameter("aboutUs");
 			String website = request.getParameter("website");
 			
+			String error = "Username " + username + " already Exists!!" ;
+			
+			if(emDao.EmployerUsernameExists(username)) {
+				request.setAttribute("error", error);
+				RequestDispatcher view = request.getRequestDispatcher("emCreateAccount.jsp");
+				view.forward(request, response);
+			}
+			
+			else {
+			
 			EmployerBean em = new EmployerBean(username, password, eName, address, contact, aboutUs, website);
 			emDao.addEmployer(em);
 			session.setAttribute("employer", emDao.getEmployer(username, password));
 			
 			RequestDispatcher view = request.getRequestDispatcher("PostJob.jsp");
 			view.forward(request, response);
-		}else { // action.equalsIgnoreCase("")
+			}
+		}
 		
+		else if(action.equalsIgnoreCase("logout")){ 
+			
+			session.invalidate();
+			response.sendRedirect("index.html");
 		}
 	}
 
