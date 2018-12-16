@@ -63,7 +63,7 @@ int eId = em.getEmployerId();
 <input type="hidden" name="action" class="form-control" value="update">
 <input type="hidden" name="jobId" value="${job.jobId }" class="form-control">
 <label>Title</label><br>
-<input type = "text" class="form-control" name = "title"/><br>
+<input type = "text" class="form-control" name = "title" value="${job.title}"/><br>
 <label>City</label><br>
 <select name="city" class="form-control">
   	<option value="Mississauga">Mississauga</option>
@@ -72,7 +72,7 @@ int eId = em.getEmployerId();
   	<option value="Toronto">Toronto</option>
 </select><br>
 <label>Address</label></br>
-<input type = "text" class="form-control" name = "address"/></br>
+<input type = "text" class="form-control" name = "address" value="${job.address}"/></br>
 <label>Number of Positions</label></br>
 <select name="numOfPosition" class="form-control">
   	<option value="1">1</option>
@@ -87,15 +87,15 @@ int eId = em.getEmployerId();
   	<option value="10">10</option>
 </select><br>
 <label>Description</label><br>
-<input type = "text" class="form-control" name = "description"/><br>
+<input type = "text" class="form-control" name = "description" value="${job.description}"/><br>
 <label>Qualifications</label></br>
-<input type = "text" class="form-control" name = "qualification"/><br>
+<input type = "text" class="form-control" name = "qualification" value="${job.qualification}"/><br>
 <label>Note</label></br>
-<input type = "text" class="form-control" name = "note"/><br>
+<input type = "text" class="form-control" name = "note" value="${job.note}"/><br>
 <label>Posting Date</label><br>
-<input type = "text" class="form-control" name = "postingdate"/><br>
+<input type = "text" class="form-control" name = "postingdate" value="${job.postingDate}"/><br>
 <label>Closing Date</label><br>
-<input type = "text" class="form-control" name = "closingdate"/><br><br>
+<input type = "text" class="form-control" name = "closingdate" value="${job.closingDate}"/><br><br>
 <input type = "submit" class="btn btn-info" value = "Post Job"/>
 </form>
 </div>
