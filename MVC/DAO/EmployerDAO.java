@@ -96,6 +96,42 @@ public class EmployerDAO {
 		return em;
 	}
 	
+	public boolean EmployerUsernameExists(String username) {
+		
+		System.out.println("method: getEmployer using username and password");
+		Connection conn = null;
+		EmployerBean em = new EmployerBean();
+		
+		try {
+			System.out.println("DAO getconnect");
+			conn = DBUtil.getConnection();
+			System.out.println("DAO finish connect");
+			String sql = "SELECT * FROM employers WHERE username = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			
+			ResultSet rSet = pstmt.executeQuery();
+			
+			System.out.println("inside try");
+			
+			if(rSet.next()) { //if the employer exists				
+				System.out.println("employer UserName Already Exists!!!");
+				return true;
+				
+			}
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally {
+			DBUtil.closeConnection(conn);
+		}
+		
+		return false;	
+
+	}
+	
 	public EmployerBean getEmployer1(int jobId) {
 		System.out.println("method: getEmployer using jobId");
 		Connection conn = null;
@@ -217,4 +253,3 @@ public class EmployerDAO {
 	}
 	
 }
-
