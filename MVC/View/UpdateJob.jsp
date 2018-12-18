@@ -7,23 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Update Job Posting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .bg-4 {
 	background-color: #2f2f2f; /* Black Gray */
 	color: #fff;
 }
+
 .container-fluid {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
+
 p {
 	font-size: 16px;
 }
@@ -35,7 +33,7 @@ EmployerBean em = (EmployerBean) request.getSession().getAttribute("employer");
 String eName = em.getEName();
 int eId = em.getEmployerId();
 %>
-<!-- navigation -->
+	<!-- navigation -->
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<ul class="nav navbar-nav">
@@ -55,50 +53,53 @@ int eId = em.getEmployerId();
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
-			<h1>You are the next innovator!</h1>
-<h1>Welcome <%=eName%></h1>
-<h2>EmployerId <%=eId%></h2>
-<h2>Please Update the Job as following</h2>
-<form action = "JobController"  method ="Post">
-<input type="hidden" name="action" class="form-control" value="update">
-<input type="hidden" name="jobId" value="${job.jobId }" class="form-control">
-<label>Title</label><br>
-<input type = "text" class="form-control" name = "title" value="${job.title}"/><br>
-<label>City</label><br>
-<select name="city" class="form-control">
-  	<option value="Mississauga">Mississauga</option>
-  	<option value="Oakville">Oakville</option>
-  	<option value="Brampton">Brampton</option>
-  	<option value="Toronto">Toronto</option>
-</select><br>
-<label>Address</label></br>
-<input type = "text" class="form-control" name = "address" value="${job.address}"/></br>
-<label>Number of Positions</label></br>
-<select name="numOfPosition" class="form-control">
-  	<option value="1">1</option>
-  	<option value="2">2</option>
-  	<option value="3">3</option>
-  	<option value="4">4</option>
-  	<option value="5">5</option>
-  	<option value="6">6</option>
-  	<option value="7">7</option>
-  	<option value="8">8</option>
-  	<option value="9">9<option>
-  	<option value="10">10</option>
-</select><br>
-<label>Description</label><br>
-<input type = "text" class="form-control" name = "description" value="${job.description}"/><br>
-<label>Qualifications</label></br>
-<input type = "text" class="form-control" name = "qualification" value="${job.qualification}"/><br>
-<label>Note</label></br>
-<input type = "text" class="form-control" name = "note" value="${job.note}"/><br>
-<label>Posting Date</label><br>
-<input type = "text" class="form-control" name = "postingdate" value="${job.postingDate}"/><br>
-<label>Closing Date</label><br>
-<input type = "text" class="form-control" name = "closingdate" value="${job.closingDate}"/><br><br>
-<input type = "submit" class="btn btn-info" value = "Post Job"/>
-</form>
-</div>
+				<h1>You are the next innovator!</h1>
+				<h1>
+					Welcome
+					<%=eName%></h1>
+				<h2>
+					EmployerId
+					<%=eId%></h2>
+				<h2>Please Update the Job as following</h2>
+				<form action="JobController" method="Post">
+					<input type="hidden" name="action" class="form-control"
+						value="update"> <input type="hidden" name="jobId"
+						value="${job.jobId }" class="form-control"> <label>Title</label><br>
+					<input type="text" class="form-control" name="title"
+						value="${job.title}" /><br> <label>City</label><br> <select
+						name="city" class="form-control">
+						<option value="Mississauga">Mississauga</option>
+						<option value="Oakville">Oakville</option>
+						<option value="Brampton">Brampton</option>
+						<option value="Toronto">Toronto</option>
+					</select><br> <label>Address</label></br> <input type="text"
+						class="form-control" name="address" value="${job.address}" /></br> <label>Number
+						of Positions</label></br> <select name="numOfPosition" class="form-control">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9
+						<option>
+						<option value="10">10</option>
+					</select><br> <label>Description</label><br> <input type="text"
+						class="form-control" name="description" value="${job.description}" /><br>
+					<label>Qualifications</label></br> <input type="text"
+						class="form-control" name="qualification"
+						value="${job.qualification}" /><br> <label>Note</label></br> <input
+						type="text" class="form-control" name="note" value="${job.note}" /><br>
+					<label>Posting Date</label><br> <input type="text"
+						class="form-control" name="postingdate" value="${job.postingDate}" /><br>
+					<label>Closing Date</label><br> <input type="text"
+						class="form-control" name="closingdate" value="${job.closingDate}" /><br>
+					<br> <input type="submit" class="btn btn-info"
+						value="Post Job" />
+				</form>
+			</div>
 			<div class="col-sm-3"></div>
 		</div>
 		<br>
